@@ -1,0 +1,5 @@
+Backend/obj/*
+backend/bin/*
+backend/target/*
+
+backend/src/main/resources/application.properties

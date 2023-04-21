@@ -1,5 +1,6 @@
 package com.phaser.project.controllers;
 
+import com.phaser.project.domain.dto.BulkUpdateOrderRequest;
 import com.phaser.project.domain.dto.PhaseDto;
 import com.phaser.project.domain.dto.PhaseRequest;
 import com.phaser.project.domain.exceptions.RecordNotFoundException;
@@ -28,7 +29,7 @@ public class PhaseController {
 
     @GetMapping()
     public ResponseEntity<?> GetPhases() {
-        var phases = phaseRepository.findAll();
+        var phases = phaseRepository.findAllOrderByPhaseOrder();
         var mappedPhases = Mapper.mapList(phases, PhaseDto.class);
 
         return ResponseEntity.ok(mappedPhases);
@@ -36,7 +37,10 @@ public class PhaseController {
 
     @PostMapping()
     public ResponseEntity<?> CreatePhase(@RequestBody PhaseRequest request) {
+        Integer max = phaseRepository.maxPhaseOrder();
+
         var phase = Mapper.map(request, PhaseEntity.class);
+        phase.setPhaseOrder(max==null? 0: max+1);
         phase = phaseRepository.save(phase);
         var phaseDto = Mapper.map(phase, PhaseDto.class);
         return ResponseEntity.ok(phaseDto);
@@ -46,10 +50,13 @@ public class PhaseController {
     public ResponseEntity<?> UpdatePhase(@RequestBody PhaseRequest request, @PathVariable Long id) {
         var phase = phaseRepository.findById(id);
         if (!phase.isPresent()) throw new RecordNotFoundException("Phase id not found");
-        Mapper.map(request, phase);
-        phaseRepository.save(phase.get());
+        var phaseValue = phase.get();
+        var orderValue = phaseValue.getPhaseOrder();
+        Mapper.map(request, phaseValue);
+        phaseValue.setPhaseOrder(orderValue);
+        phaseRepository.save(phaseValue);
 
-        var phaseDto = Mapper.map(phase, PhaseDto.class);
+        var phaseDto = Mapper.map(phaseValue, PhaseDto.class);
         return ResponseEntity.ok(phaseDto);
     }
 
@@ -60,6 +67,18 @@ public class PhaseController {
         phaseRepository.delete(phase.get());
         return ResponseEntity.ok().build();
     }
+    @PutMapping("ordering")
+    public ResponseEntity<?> BulkUpdateOrder(@RequestBody BulkUpdateOrderRequest request){
+        for (int i = 0; i < request.getOrderItems().size(); i++) {
+            var phase = phaseRepository.findById(request.getOrderItems().get(i).getId());
+            if (!phase.isPresent()) throw new RecordNotFoundException("Phase " + request.getOrderItems().get(i).getId() + " not found");
+            var phaseValue = phase.get();
+            phaseValue.setPhaseOrder(request.getOrderItems().get(i).getOrder());
+            phaseRepository.save(phaseValue);
+        }
+        return ResponseEntity.ok().build();
+    }
+
 
     @PutMapping("{phaseId}/{actionId}")
     public ResponseEntity<?> AddActionToPhase(@PathVariable Long phaseId, @PathVariable Long actionId){

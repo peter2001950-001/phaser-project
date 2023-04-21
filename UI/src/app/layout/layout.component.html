@@ -1,0 +1,16 @@
+<p-toast [baseZIndex]="9999999"></p-toast>
+<div
+  class="layout-wrapper" [ngClass]="containerClass"
+>
+   <app-layout-topbar></app-layout-topbar>
+   <div class="layout-sidebar">
+    <app-layout-sidebar></app-layout-sidebar>
+  </div>
+
+  <div class="layout-main-container">
+    <div class="layout-main">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+</div>

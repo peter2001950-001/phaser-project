@@ -1,0 +1,14 @@
+<form [formGroup]="form"  style="margin-top: 25px;">
+  <div class="grid">
+    <div class="col-6 mt-2">
+      <span class="p-float-label">
+        <input id="name" pInputText  type="text" formControlName="name" class="p-inputtext-lg" pInputText
+        [ngClass]="{ error: form.get('name')?.invalid && form.get('name')?.touched }"/>
+        <label for="name">Phase name</label>
+      </span>
+    </div>
+  </div>
+</form>
+<div class="flex justify-content-end mt-2 px-2" style="width: 100%;">
+  <button pButton (click)="save()">Save changes</button>
+</div>
