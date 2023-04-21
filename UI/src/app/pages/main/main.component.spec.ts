@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhaseEditComponent } from './phase-edit.component';
+import { MainComponent } from './main.component';
 
-describe('PhaseEditComponent', () => {
-  let component: PhaseEditComponent;
-  let fixture: ComponentFixture<PhaseEditComponent>;
+describe('MainComponent', () => {
+  let component: MainComponent;
+  let fixture: ComponentFixture<MainComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhaseEditComponent ]
+      declarations: [ MainComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PhaseEditComponent);
+    fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

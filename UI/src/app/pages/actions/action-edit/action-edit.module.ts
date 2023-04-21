@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActionCreateComponent} from './action-create.component';
+import { ActionEditComponent } from './action-edit.component';
 import { ActionFormModule } from '../action-form/action-form.module';
 
 
 
 @NgModule({
   declarations: [
-    ActionCreateComponent
+    ActionEditComponent
   ],
   imports: [
     CommonModule,
     ActionFormModule
   ]
 })
-export class ActionCreateModule { }
+export class ActionEditModule { }

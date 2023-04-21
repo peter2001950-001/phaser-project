@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhaseFormComponent } from './phase-form.component';
+import { ActionFormComponent } from './action-form.component';
 
-describe('PhaseFormComponent', () => {
-  let component: PhaseFormComponent;
-  let fixture: ComponentFixture<PhaseFormComponent>;
+describe('ActionFormComponent', () => {
+  let component: ActionFormComponent;
+  let fixture: ComponentFixture<ActionFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhaseFormComponent ]
+      declarations: [ ActionFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PhaseFormComponent);
+    fixture = TestBed.createComponent(ActionFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

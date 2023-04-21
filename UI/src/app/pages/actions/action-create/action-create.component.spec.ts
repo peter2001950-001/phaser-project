@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PhaseCreateComponent } from './action-create.component';
+import { ActionCreateComponent } from './action-create.component';
 
-describe('PhaseCreateComponent', () => {
-  let component: PhaseCreateComponent;
-  let fixture: ComponentFixture<PhaseCreateComponent>;
+describe('ActionCreateComponent', () => {
+  let component: ActionCreateComponent;
+  let fixture: ComponentFixture<ActionCreateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PhaseCreateComponent ]
+      declarations: [ ActionCreateComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PhaseCreateComponent);
+    fixture = TestBed.createComponent(ActionCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

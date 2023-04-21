@@ -10,7 +10,6 @@ public class PhaseDto {
 
     private String name;
     private Integer phaseOrder;
-    private Set<ActionDto> actions;
 
     public Long getId() {
         return id;
@@ -34,13 +33,5 @@ public class PhaseDto {
 
     public void setPhaseOrder(Integer phaseOrder) {
         this.phaseOrder = phaseOrder;
-    }
-
-    public Set<ActionDto> getActions() {
-        return actions;
-    }
-
-    public void setActions(Set<ActionDto> actions) {
-        this.actions = actions;
     }
 }

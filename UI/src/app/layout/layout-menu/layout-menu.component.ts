@@ -18,7 +18,8 @@ export class LayoutMenuComponent implements OnInit {
                 label: 'Home',
                 items: [
                     { label: 'Phases', icon: 'pi pi-fw pi-home', routerLink: ['/phases'] },
-                    { label: 'Actions', icon: 'pi pi-fw pi-home', routerLink: ['/actions'] }
+                    { label: 'Actions', icon: 'pi pi-fw pi-home', routerLink: ['/actions'] },
+                    { label: 'Run', icon: 'pi pi-fw pi-home', routerLink: ['/run'] }
                 ]
             }
         ];

@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-phase-form',
-  templateUrl: './phase-form.component.html',
-  styleUrls: ['./phase-form.component.scss']
+  selector: 'app-action-form',
+  templateUrl: './action-form.component.html',
+  styleUrls: ['./action-form.component.scss']
 })
-export class PhaseFormComponent {
+export class ActionFormComponent {
   @Input() public request: any;
   @Output() public submit = new EventEmitter<any>();
   @Output() public close = new EventEmitter<any>();
@@ -23,11 +23,12 @@ export class PhaseFormComponent {
     }
   }
   ngOnInit(): void {
-    const { name } =
+    const { name, duration } =
       this.request;
 
       this.form = this.fb.group({
-      name: this.fb.control(name, [Validators.required])
+      name: this.fb.control(name, [Validators.required]),
+      duration: this.fb.control(duration, [Validators.required, Validators.min(0)])
     });
   }
 }

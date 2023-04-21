@@ -4,7 +4,14 @@
       <span class="p-float-label">
         <input id="name" pInputText  type="text" formControlName="name" class="p-inputtext-lg" pInputText
         [ngClass]="{ error: form.get('name')?.invalid && form.get('name')?.touched }"/>
-        <label for="name">Phase name</label>
+        <label for="name">Action name</label>
+      </span>
+    </div>
+    <div class="col-6 mt-2">
+      <span class="p-float-label">
+        <input id="duration" pInputText  type="number" formControlName="duration" class="p-inputtext-lg" pInputText
+        [ngClass]="{ error: form.get('duration')?.invalid && form.get('duration')?.touched }"/>
+        <label for="name">Duration</label>
       </span>
     </div>
   </div>

@@ -20,7 +20,8 @@ export class ActionCreateComponent {
   ngOnInit(): void {
    this.phaseId = this.config.data.phaseId;
    this.request = {
-      name :""
+      name :"",
+      duration: 0
    }
   }
 

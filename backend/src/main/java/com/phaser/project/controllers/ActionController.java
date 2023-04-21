@@ -32,7 +32,7 @@ public class ActionController {
 
     @GetMapping("{phaseId}/actions")
     public ResponseEntity<?> GetActions(@PathVariable Long phaseId) {
-        var actions = actionRepository.findAll();
+        var actions = actionRepository.findAllByPhase_Id(phaseId);
         var mappedActions = Mapper.mapList(actions, ActionDto.class);
 
         return ResponseEntity.ok(mappedActions);
