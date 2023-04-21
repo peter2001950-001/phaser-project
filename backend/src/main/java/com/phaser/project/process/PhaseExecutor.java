@@ -22,6 +22,7 @@ public class PhaseExecutor {
 
     public void start(){
         System.out.println("---- Phase " + phaser.getPhase() + " has started ----");
+        //phaser.register();
         for (int i = 0; i < actions.size(); i++) {
             var action = new BaseAction(phaser, actions.get(i));
             executorService.submit(action);

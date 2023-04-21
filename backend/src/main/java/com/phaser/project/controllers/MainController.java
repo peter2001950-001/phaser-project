@@ -9,6 +9,7 @@ import com.phaser.project.repositories.ActionRepository;
 import com.phaser.project.repositories.PhaseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,21 +26,20 @@ public class MainController {
 
     private final PhaseRepository phaseRepository;
     private final ActionRepository actionRepository;
+    private SimpMessagingTemplate messagingTemplate;
     @PostMapping("run")
     public ResponseEntity<?> RunProcess() {
 
+        messagingTemplate.convertAndSend("/topic", "hoo00");
         Phaser phaser = new Phaser(1);
         var phases = phaseRepository.findAllOrderByPhaseOrder();
         var phaseExecutors = new ArrayList<PhaseExecutor>();
         var executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < phases.size(); i++) {
             var actions = actionRepository.findAllByPhase_Id(phases.get(i).getId());
-            phaseExecutors.add(new PhaseExecutor(actions, phaser, executorService));
+            var executor = new PhaseExecutor(actions, phaser, executorService);
+            executor.start();
         }
-        for (int i = 0; i < phaseExecutors.size(); i++) {
-            phaseExecutors.get(i).start();
-        }
-
         return ResponseEntity.ok().build();
     }
 }
