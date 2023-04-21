@@ -9,6 +9,7 @@ export class MainService {
 
 
   public readonly endpoint = '/main';
+  public messages: string[] = []
 
   constructor(public http: HttpClient) {}
 

@@ -1,1 +1,5 @@
-<p-button (onClick)="runProcess()"></p-button>
+<p-button (onClick)="runProcess()">Start phases</p-button>
+<div>
+    <p>Messages:</p>
+    <div *ngFor="let message of svc.messages">{{ message }}</div>
+</div>

@@ -8,8 +8,8 @@ import { MainService } from 'src/app/services/main/main.service';
 })
 export class MainComponent {
 
-  constructor(private svc: MainService) {
-
+  constructor(public svc: MainService) {
+    
   }
   runProcess(){
       this.svc.create().subscribe(res=>{

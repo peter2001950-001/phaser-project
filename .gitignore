@@ -3,3 +3,4 @@ backend/bin/*
 backend/target/*
 
 backend/src/main/resources/application.properties
+backend/target/classes/application.properties

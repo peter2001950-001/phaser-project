@@ -1,33 +1,34 @@
 package com.phaser.project.process;
 
 import com.phaser.project.entities.ActionEntity;
-import com.phaser.project.entities.PhaseEntity;
+import com.phaser.project.messagingstompwebsocket.MyWebSocketHandler;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Phaser;
 
 public class PhaseExecutor {
 
-    public PhaseExecutor(List<ActionEntity> actions, Phaser phaser, ExecutorService executorService){
+    private final List<ActionEntity> actions;
+    private final Phaser phaser;
+    private final ExecutorService executorService;
+    private final MyWebSocketHandler myWebSocketHandler;
 
+    public PhaseExecutor(List<ActionEntity> actions, Phaser phaser, ExecutorService executorService, MyWebSocketHandler myWebSocketHandler) {
         this.actions = actions;
         this.phaser = phaser;
         this.executorService = executorService;
+        this.myWebSocketHandler = myWebSocketHandler;
     }
-    private List<ActionEntity> actions;
-    private Phaser phaser;
-    private ExecutorService executorService;
 
-    public void start(){
+    public void start() {
         System.out.println("---- Phase " + phaser.getPhase() + " has started ----");
         //phaser.register();
-        for (int i = 0; i < actions.size(); i++) {
-            var action = new BaseAction(phaser, actions.get(i));
+        for (ActionEntity actionEntity : actions) {
+            var action = new BaseAction(phaser, actionEntity, myWebSocketHandler);
             executorService.submit(action);
         }
         phaser.arriveAndAwaitAdvance();
-        System.out.println("---- Phase " + (phaser.getPhase()-1) + " is completed ----");
+        System.out.println("---- Phase " + (phaser.getPhase() - 1) + " is completed ----");
     }
 }
