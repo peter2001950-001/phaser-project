@@ -1,5 +1,4 @@
 import { ActionModule } from './../pages/actions/action.module';
-import { ContactListModule } from './../pages/contacts/contact-list/contact-list.module';
 import { LayoutModule } from './layout.module';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -11,12 +10,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [{
       path: '',
-      redirectTo: '/contacts',
+      redirectTo: '/run',
       pathMatch: 'full'
-    },
-    {
-      path: 'contacts',
-      loadChildren: () => import('../pages/contacts/contacts.module').then((m) => m.ContactsModule)
     },
     {
       path: 'phases',
