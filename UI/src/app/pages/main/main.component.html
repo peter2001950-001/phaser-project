@@ -1,5 +1,26 @@
-<p-button (onClick)="runProcess()">Start phases</p-button>
-<div>
-    <p>Messages:</p>
-    <div *ngFor="let message of svc.messages">{{ message }}</div>
+<p-button styleClass="mb-3" [disabled]="runningProcess" (onClick)="runProcess()">Start phases</p-button>
+
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <p-progressBar *ngIf="runningProcess" mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+
+      <ng-container *ngFor="let phase of phases">
+        <h2 [class.pending]="phase.started&&!phase.finished"  [class.finished]="phase.finished">{{phase.name}}</h2>
+        <ng-container *ngFor="let action of actions">
+          <div class="p-d-flex p-jc-between p-ai-center" style="display: flex; justify-content: space-between;
+          align-items: end;">
+           <p [class.pending]="action.started&&!action.finished" [class.finished]="action.finished" *ngIf="action.phase.id == phase.id">
+             {{action.name}} <span *ngIf="action.finished">({{action.duration}} ms)</span>
+          </p>
+
+        </div>
+
+        </ng-container>
+      </ng-container>
+
+    </div>
+
+  </div>
+
 </div>
