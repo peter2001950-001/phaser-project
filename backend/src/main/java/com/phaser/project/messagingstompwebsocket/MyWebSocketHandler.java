@@ -37,7 +37,7 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
         System.out.println("connection closed: " + status);
         WebSocketSession existingSession = null;
         for (int i = 0; i < sessions.size(); i++) {
-            if(sessions.get(i).getId() == session.getId()){
+            if(sessions.get(i).getId().equals(session.getId())){
                 existingSession = sessions.get(i);
             }
         }
